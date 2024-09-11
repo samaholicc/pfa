@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .register-container {
+            max-width: 400px;
+            margin: 5% auto;
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .register-container h1 {
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #28a745;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .form-control {
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+        .btn-custom {
+            width: 100%;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #218838;
+        }
+        .alert {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="register-container">
+    <h1>Bienvenue dans GEOMADEV</h1>
+    <form th:action="@{/users/register}" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="prenom">Prenom</label>
+            <input type="text" id="prenom" th:field="*{prenom}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" th:field="*{password}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-custom">Register</button>
+        <div th:if="${error}" class="alert alert-danger mt-2" role="alert" th:text="${error}"></div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 5% auto;
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .login-container h1 {
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #007bff;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .form-control {
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+        .btn-custom {
+            width: 100%;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        .alert {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h1>Connectez avec votre compte</h1>
+    <form th:action="@{/users/login}" method="post">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-custom">Login</button>
+        <div th:if="${error}" class="alert alert-danger mt-2" role="alert" th:text="${error}"></div>
+    </form>
+</div>
+</body>
+</html>

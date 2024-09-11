@@ -1,0 +1,8 @@
+package com.pfa.repository;
+
+import com.pfa.models.Training;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TrainingRepository extends JpaRepository<Training, Long> {
+}
+

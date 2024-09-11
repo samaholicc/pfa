@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${client.id} ? 'Edit Client' : 'New Client'"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 th:text="${client.id} ? 'Edit Client' : 'New Client'"></h1>
+    <form id="clientForm" th:action="@{/api/clients}" th:object="${client}" method="post">
+        <input type="hidden" th:if="${client.id}" th:name="id" th:value="${client.id}"/>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="contactPerson">Contact Person</label>
+            <input type="text" id="contactPerson" th:field="*{contactPerson}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" th:field="*{phone}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" th:field="*{address}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/clients" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+<script>
+    document.getElementById('clientForm').onsubmit = function(e) {
+        e.preventDefault();
+        var formData = new FormData(e.target);
+        var method = formData.get('id') ? 'PUT' : 'POST';
+        var url = '/api/clients' + (formData.get('id') ? '/' + formData.get('id') : '');
+
+        fetch(url, {
+            method: method,
+            body: JSON.stringify(Object.fromEntries(formData)),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '/clients/view';
+            } else {
+                alert('Error saving client');
+            }
+        });
+    }
+</script>
+</body>
+</html>

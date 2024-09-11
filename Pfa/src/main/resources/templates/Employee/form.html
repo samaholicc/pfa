@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${employee.id != null} ? 'Edit Employee' : 'Add New Employee'">Employee Form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h1 th:text="${employee.id != null} ? 'Edit Employee' : 'Add New Employee'"></h1>
+  <form th:action="${employee.id != null} ? @{/employees/update/{id}(id=${employee.id})} : @{/employees/create}" method="post">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" class="form-control" th:value="${employee.firstName}" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" class="form-control" th:value="${employee.lastName}" required>
+    </div>
+    <div class="form-group">
+      <label for="position">Position</label>
+      <input type="text" id="position" name="position" class="form-control" th:value="${employee.position}" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" class="form-control" th:value="${employee.email}" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" class="form-control" th:value="${employee.phone}" required>
+    </div>
+    <div class="form-group">
+      <label for="hireDate">Hire Date</label>
+      <input type="date" id="hireDate" name="hireDate" class="form-control" th:value="${employee.hireDate}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/employees" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+</body>
+</html>

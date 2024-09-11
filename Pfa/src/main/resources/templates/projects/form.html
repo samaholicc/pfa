@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h1 th:text="${project.id == null ? 'Add New Project' : 'Edit Project'}"></h1>
+  <form th:action="@{/projects/save}" th:object="${project}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" class="form-control" th:field="*{name}" required />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" class="form-control" th:field="*{description}" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="date" id="startDate" class="form-control" th:field="*{startDate}" required />
+    </div>
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input type="date" id="endDate" class="form-control" th:field="*{endDate}" required />
+    </div>
+    <div class="form-group">
+      <label for="client">Client</label>
+      <select id="client" class="form-control" th:field="*{client.id}" required>
+        <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="service">Service</label>
+      <select id="service" class="form-control" th:field="*{service.id}" required>
+        <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.name}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" class="form-control" th:field="*{status}" required>
+        <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/projects" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+</body>
+</html>

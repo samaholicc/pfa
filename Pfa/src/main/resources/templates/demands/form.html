@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${demand.id != null} ? 'Edit Demand' : 'Create Demand'">Demand Form</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<h1 th:text="${demand.id != null} ? 'Edit Demand' : 'Create Demand'"></h1>
+<form th:action="@{/demands/save}" th:object="${demand}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" />
+
+    <label for="description">Description:</label>
+    <textarea id="description" th:field="*{description}"></textarea>
+
+    <label for="requestDate">Request Date:</label>
+    <input type="date" id="requestDate" th:field="*{requestDate}" />
+
+    <label for="dueDate">Due Date:</label>
+    <input type="date" id="dueDate" th:field="*{dueDate}" />
+
+    <label for="service">Service:</label>
+    <select id="service" th:field="*{service}">
+        <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.name}"></option>
+    </select>
+
+    <label for="status">Status:</label>
+    <select id="status" th:field="*{status}">
+        <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
+    </select>
+
+    <button type="submit">Save</button>
+    <a href="/demands">Cancel</a>
+</form>
+</body>
+</html>
